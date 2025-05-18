@@ -1,6 +1,6 @@
--- ================================================
--- Airbnb Disertatie Database Schema
--- ================================================
+================================================
+Airbnb Disertatie Database Schema
+================================================
 
 -- Create Database
 CREATE DATABASE airbnb_disertatie;
