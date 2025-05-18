@@ -5,7 +5,17 @@ Business Intelligence app built in Qlik Sense, based on the dataset from AirBnB.
 ![Alt text](https://github.com/roxanatdg/QlikSense-app/blob/main/Pics/qliksense-app.png)
 
 
-To enhance location-based analysis, I introduced a custom measure called CityCenterRange, which clusters listings based on their distance to the city center. This allows users to identify trends and pricing behaviors depending on how central the listing is.
+
+
+To uncover trends more effectively, I implemented custom bucketing logic across multiple variables using Qlik Sense's IntervalMatch feature. These buckets segment continuous metrics into intuitive categories, improving visual analysis and filtering capabilities.
+    CityCenterRange: Classifies listings by proximity to the city center (e.g., Central, Inner Ring, Outer Ring), enhancing location-based pricing insights.
+    MetroRange: Clusters listings by distance to the nearest metro station, helping assess accessibility-driven value.
+    RestaurantRange & AttractionRange: Groups listings by nearby restaurant and attraction density, revealing patterns tied to amenity-rich areas.
+    SatisfactionRange: Segments properties based on guest satisfaction scores, enabling quality-based comparisons.
+
+This structured binning approach makes it easier to visualize and analyze Airbnb listings in a user-friendly, non-technical way.
+
+
 
 
 
