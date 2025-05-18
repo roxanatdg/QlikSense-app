@@ -14,7 +14,8 @@ To uncover trends more effectively, I implemented custom bucketing logic across 
 * **RestaurantRange & AttractionRange**: Groups listings by nearby restaurant and attraction density, revealing patterns tied to amenity-rich areas.
 * **SatisfactionRange**: Segments properties based on guest satisfaction scores, enabling quality-based comparisons.
 
-This structured binning approach makes it easier to visualize and analyze Airbnb listings in a user-friendly, non-technical way.
+This structured binning approach makes it easier to visualize and analyze Airbnb listings in a user-friendly, non-technical way. 📊 View the full Qlik Sense script here: [airbnb_disertatie.qvs](./airbnb_disertatie.qvs)
+
 
 
 
