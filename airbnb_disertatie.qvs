@@ -1,5 +1,5 @@
-
-LIB CONNECT TO 'Microsoft_SQL_Server_DESKTOP-CNP6FNDMSSQLSERVER01';
+```
+LIB CONNECT TO 'Microsoft_SQL_Server_DESKTOP-MYSQLSERVER55';
 
 Intro:
 LOAD * INLINE
@@ -256,5 +256,5 @@ Resident GuestSatisfactionBuckets;
 Drop table GuestSatisfactionBuckets;
 
 exit Script;
-
+```
 
