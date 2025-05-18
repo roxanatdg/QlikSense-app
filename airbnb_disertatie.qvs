@@ -1,4 +1,3 @@
-```
 LIB CONNECT TO 'Microsoft_SQL_Server_DESKTOP-MYSQLSERVER55';
 
 Intro:
@@ -256,5 +255,5 @@ Resident GuestSatisfactionBuckets;
 Drop table GuestSatisfactionBuckets;
 
 exit Script;
-```
+
 
