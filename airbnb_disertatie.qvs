@@ -1,0 +1,260 @@
+
+LIB CONNECT TO 'Microsoft_SQL_Server_DESKTOP-CNP6FNDMSSQLSERVER01';
+
+Intro:
+LOAD * INLINE
+[
+Intro
+Intro
+];
+
+
+let vZero = 0;
+
+Financials:
+LOAD Year, 
+	Revenue_EUR_M, 
+	Operating_Expenses_EUR_M, 
+	Profit_Margin, 
+	Marketing_Spend_EUR_M, 
+	EBITDA_Margin;
+
+
+SELECT "Year",
+	"Revenue_EUR_M",
+	"Operating_Expenses_EUR_M",
+	"Profit_Margin",
+	"Marketing_Spend_EUR_M",
+	"EBITDA_Margin"
+FROM "airbnb_disertatie".dbo.Financials;
+
+Cities:
+LOAD ID_City, 
+	City, 
+	Country, 
+	Population, 
+	Timezone, 
+	Region, 
+	Avg_Income_EUR_per_year;
+
+SELECT "ID_City",
+	City,
+	Country,
+	Population,
+	Timezone,
+	Region,
+	"Avg_Income_EUR_per_year"
+FROM "airbnb_disertatie".dbo.Cities;
+
+DayType:
+LOAD ID_Day, 
+	Day;
+
+
+SELECT "ID_Day",
+	"Day"
+FROM "airbnb_disertatie".dbo.DayType;
+
+FurnishingLevels:
+LOAD Furnishing_id, 
+	Level_name, 
+	Description as Description_FurnishingLevels;
+
+
+SELECT "Furnishing_id",
+	"Level_name",
+	Description
+FROM "airbnb_disertatie".dbo.FurnishingLevels;
+
+
+RoomType:
+LOAD ID_Room, 
+	Room_Type, 
+	Description as Description_Room, 
+	Privacy_level, 
+	Has_private_bath, 
+	Ideal_for, 
+	Furnishing_id;
+
+SELECT "ID_Room",
+	"Room_Type",
+	Description,
+	"Privacy_level",
+	"Has_private_bath",
+	"Ideal_for",
+	"Furnishing_id"
+FROM "airbnb_disertatie".dbo.RoomType;
+
+
+Listings:
+LOAD ID_Listing, 
+	ID_City, 
+	ID_Day, 
+	ID_Room, 
+	Shared_Room, 
+	Private_Room, 
+	Person_Capacity, 
+	Superhost, 
+	Multiple_Rooms, 
+	Business, 
+	Cleanliness_Rating, 
+	Guest_Satisfaction, 
+	Bedrooms, 
+	City_Center_km, 
+	Metro_Distance_km, 
+	Attraction_Index, 
+	Normalised_Attraction_Index, 
+	Restaurant_Index, 
+	Normalised_Restaurant_Index, 
+	Price, 
+	Price_Outlier_Flag;
+
+SELECT "ID_Listing",
+	"ID_City",
+	"ID_Day",
+	"ID_Room",
+	"Shared_Room",
+	"Private_Room",
+	"Person_Capacity",
+	Superhost,
+	"Multiple_Rooms",
+	Business,
+	"Cleanliness_Rating",
+	"Guest_Satisfaction",
+	Bedrooms,
+	"City_Center_km",
+	"Metro_Distance_km",
+	"Attraction_Index",
+	"Normalised_Attraction_Index",
+	"Restaurant_Index",
+	"Normalised_Restaurant_Index",
+	Price,
+	"Price_Outlier_Flag"
+FROM "airbnb_disertatie".dbo."Listings_With_OutlierFlag"
+//where Price_Outlier_Flag = 0
+;
+
+//bucket1
+MetroDistanceBuckets:
+LOAD * INLINE [
+Start, End, MetroRange
+0, 1, 'Very Close (0-1km)'
+1.00001, 3, 'Close (1-3km)'
+3.00001, 6, 'Moderate (3-6km)'
+6.00001, 9, 'Far (6-9km)'
+9.00001, 1000, 'Very Far (9-14km)'
+];
+
+
+Inner Join IntervalMatch (Metro_Distance_km)
+LOAD Start, End
+Resident MetroDistanceBuckets;
+
+Left Join(Listings)
+LOAD 
+	Metro_Distance_km,
+    MetroRange
+Resident MetroDistanceBuckets;
+    
+Drop table MetroDistanceBuckets;
+
+//bucket2 
+CityCenterBuckets:
+LOAD * INLINE [
+Start, End, CityCenterRange
+0, 3, 'Central (1-3km)'
+3.000001, 7, 'Inner Ring (3-7km)'
+7.000001, 12, 'Mid Distance (7-12km)'
+12.000001, 17, 'Outer Ring (12-17km)'
+17.000001, 1000, 'Periphery (17-25km)'
+];
+
+Inner Join Intervalmatch (City_Center_km)
+LOAD Start,End 
+Resident CityCenterBuckets;
+
+Left join (Listings)
+LOAD
+	City_Center_km,
+	CityCenterRange
+Resident CityCenterBuckets;
+
+Drop table CityCenterBuckets;
+
+
+//bucket 3 
+RestaurantBuckets:
+LOAD * INLINE [
+Start, End, RestaurantRange
+0, 1400, 'Very Low (0–1400)'
+1400.0001, 2800, 'Low (1400–2800)'
+2800.0001, 4200, 'Medium (2800–4200)'
+4200.0001, 5600, 'High (4200–5600)'
+5600.0001, 10000, 'Very High (5600+)'
+];
+
+
+Inner Join IntervalMatch (Restaurant_Index)
+LOAD Start, End
+Resident RestaurantBuckets;
+
+Left Join(Listings)
+LOAD 
+	Restaurant_Index,
+    RestaurantRange
+Resident RestaurantBuckets;
+    
+Drop table RestaurantBuckets;
+
+
+
+//bucket 4
+AttractionBuckets:
+LOAD * INLINE [
+Start, End, AttractionRange
+15, 1000, 'Very Low (15–1000)'
+1000.0001, 2000, 'Low (1000–2000)'
+2000.0001, 3000, 'Medium (2000–3000)'
+3000.0001, 4000, 'High (3000–4000)'
+4000.0001, 10000, 'Very High (4000+)'
+];
+
+Inner Join IntervalMatch (Attraction_Index)
+LOAD Start, End
+Resident AttractionBuckets;
+
+Left Join(Listings)
+LOAD 
+	Attraction_Index,
+    AttractionRange
+Resident AttractionBuckets;
+    
+Drop table AttractionBuckets;
+
+
+
+
+// Bucket 5
+GuestSatisfactionBuckets:
+LOAD * INLINE [
+Start, End, SatisfactionRange
+10, 50, 'Low (10–50)'
+50.0001, 80, 'Medium (51–80)'
+80.0001, 101, 'High (81–100)'
+];
+
+Inner Join IntervalMatch (Guest_Satisfaction)
+LOAD Start, End
+Resident GuestSatisfactionBuckets;
+
+Left Join(Listings)
+LOAD 
+    Guest_Satisfaction,
+    SatisfactionRange
+Resident GuestSatisfactionBuckets;
+
+Drop table GuestSatisfactionBuckets;
+
+exit Script;
+
+
