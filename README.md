@@ -17,7 +17,7 @@
 
 ![Alt text](https://github.com/roxanatdg/QlikSense-app/blob/main/Pics/data-schema-qlik.png)
 
-  The data model follows a star schema centered on the Listings fact table, which captures property-level metrics (price, satisfaction, location indices). It connects to dimension tables—Cities, DayType, RoomType, and FurnishingLevels—using surrogate keys for clean relational joins. 
+  The data model follows a snowflake schema centered on the Listings fact table, which captures property-level metrics (price, satisfaction, location indices). It connects to dimension tables—Cities, DayType, RoomType, and FurnishingLevels—using surrogate keys for clean relational joins. 
 
   A separate Financials table stores annual company KPIs for high-level analysis. The schema is optimized for Qlik Sense with bucketed fields to support segmentation and drill-downs.
 
