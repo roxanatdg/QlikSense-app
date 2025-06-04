@@ -14,13 +14,12 @@
 * **SatisfactionRange**: Segments properties based on guest satisfaction scores, enabling quality-based comparisons.
 
   This structured binning approach makes it easier to visualize and analyze Airbnb listings in a user-friendly, non-technical way.  Full Qlik Sense script can be read here: [airbnb_disertatie.qvs](./airbnb_disertatie.qvs)
-  
-  The EU Overview page offers a quick snapshot of the most visited European cities, combining key metrics such as booking volume, average price, tourist attractiveness, and guest satisfaction. It features a map and pie chart highlighting top cities like Rome, Paris, and Lisbon, alongside bar charts comparing average prices (highest in Amsterdam), attractiveness (led by Rome and Barcelona), and satisfaction scores, which remain high and consistent across cities—suggesting location has little impact on guest satisfaction.
-  
-  The EU Insights page offers a detailed analysis of the factors influencing the average price of Airbnb accommodations across Europe. It highlights the relationships between price and variables such as guest capacity, distance from the city center, Superhost status, guest satisfaction levels, and the tourism attractiveness index. Users can apply custom filters to explore and control the data according to their preferences.
 
+The Financials page displays Airbnb’s key financial indicators and their evolution over time (2017–2024). On the left, a container includes two charts comparing revenue with operational expenses first, and then with marketing expenses, to explore potential correlations. A filter in the top-left allows users to select the year (default is 2024). However, the timeline chart on the left and the table in the bottom-right are unaffected by this filter, as they use Set Analysis to preserve the full time-series view regardless of user selections.
+  
+The EU Overview page offers a quick snapshot of the most visited European cities, combining key metrics such as booking volume, average price, tourist attractiveness, and guest satisfaction. It features a map and pie chart highlighting top cities like Rome, Paris, and Lisbon, alongside bar charts comparing average prices (highest in Amsterdam), attractiveness (led by Rome and Barcelona), and satisfaction scores, which remain high and consistent across cities—suggesting location has little impact on guest satisfaction.
 
-  The Report Builder section provides an interactive feature for generating custom reports based on Airbnb data. Users can select cities and apply additional filters (such as distance from the city center, proximity to the metro, capacity, etc.) to analyze key indicators. The predefined table displays metrics such as minimum price, maximum price, number of bookings, and average price.
+The Report Builder section provides an interactive feature for generating custom reports based on Airbnb data. Users can select cities and apply additional filters (such as distance from the city center, proximity to the metro, capacity, etc.) to analyze key indicators. The predefined table displays metrics such as minimum price, maximum price, number of bookings, and average price.
 
 ![Alt text](https://github.com/roxanatdg/QlikSense-app/blob/main/Pics/data-schema-qlik.png)
 
