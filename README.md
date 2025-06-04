@@ -15,6 +15,8 @@
 
   This structured binning approach makes it easier to visualize and analyze Airbnb listings in a user-friendly, non-technical way.  Full Qlik Sense script can be read here: [airbnb_disertatie.qvs](./airbnb_disertatie.qvs)
 
+The Report Builder section provides an interactive feature for generating custom reports based on Airbnb data. Users can select cities and apply additional filters (such as distance from the city center, proximity to the metro, capacity, etc.) to analyze key indicators. The predefined table displays metrics such as minimum price, maximum price, number of bookings, and average price.
+
 ![Alt text](https://github.com/roxanatdg/QlikSense-app/blob/main/Pics/data-schema-qlik.png)
 
   The data model follows a snowflake schema centered on the Listings fact table, which captures property-level metrics (price, satisfaction, location indices). It connects to dimension tables—Cities, DayType, RoomType, and FurnishingLevels—using surrogate keys for clean relational joins. 
